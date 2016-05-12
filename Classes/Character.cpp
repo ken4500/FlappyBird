@@ -40,3 +40,10 @@ void Character::jump(){
     this->velocity = JUMP_SPEED;
     
 }
+
+Rect Character::getRect()
+{
+    auto bird = this->getChildByName<Sprite*>("bird");
+    Size size = bird->getContentSize() * 0.8f;
+    return Rect(this->getPosition() - size/2, size);
+}

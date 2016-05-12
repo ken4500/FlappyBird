@@ -63,9 +63,25 @@ void MainScene::onEnter()
 
 void MainScene::update(float dt)
 {
+    // 障害物の移動
     for (auto obstacle : this->obstacles) {
         obstacle->moveLeft(SCROLL_SPEED_X * dt);
     }
+    
+    // 障害物とキャラの衝突判定
+    Rect characterRect = this->character->getRect();
+    for (auto obstacle : this->obstacles) {
+        auto obstacleRects = obstacle->getRects();
+
+        for (Rect obstacleRect : obstacleRects) {
+            bool hit = characterRect.intersectsRect(obstacleRect);
+            if (hit) {
+                // TEMP
+                this->unscheduleAllCallbacks();
+            }
+        }
+    }
+    
 }
 
 void MainScene::setupTouchHandling()
