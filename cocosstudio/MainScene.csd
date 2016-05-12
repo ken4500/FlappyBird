@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
         <Size X="288.0000" Y="512.0000" />
         <Children>
-          <AbstractNodeData Name="back" ActionTag="999146604" Tag="3" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" ctype="SpriteObjectData">
+          <AbstractNodeData Name="back" ActionTag="999146604" Tag="3" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-1.4490" RightMargin="1.4490" TopMargin="1.4490" BottomMargin="-1.4490" ctype="SpriteObjectData">
             <Size X="288.0000" Y="512.0000" />
             <Children>
               <AbstractNodeData Name="ground" ActionTag="982951923" Tag="13" IconVisible="False" RightMargin="-48.0000" TopMargin="402.0000" BottomMargin="-2.0000" ctype="SpriteObjectData">
@@ -32,10 +32,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="144.0000" Y="256.0000" />
+            <Position X="142.5510" Y="254.5510" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.5000" />
+            <PrePosition X="0.4950" Y="0.4972" />
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="Assets/background/back1.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />

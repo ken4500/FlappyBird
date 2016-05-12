@@ -58,26 +58,28 @@ void MainScene::onEnter()
     Layer::onEnter();
     this->setupTouchHandling();
     this->scheduleUpdate();
-    this->schedule(CC_SCHEDULE_SELECTOR(MainScene::createObstacle), OBSTACLE_TIME_SPAN);
+    triggerReady();
 }
 
 void MainScene::update(float dt)
 {
-    // 障害物の移動
-    for (auto obstacle : this->obstacles) {
-        obstacle->moveLeft(SCROLL_SPEED_X * dt);
-    }
-    
-    // 障害物とキャラの衝突判定
-    Rect characterRect = this->character->getRect();
-    for (auto obstacle : this->obstacles) {
-        auto obstacleRects = obstacle->getRects();
 
-        for (Rect obstacleRect : obstacleRects) {
-            bool hit = characterRect.intersectsRect(obstacleRect);
-            if (hit) {
-                // TEMP
-                this->unscheduleAllCallbacks();
+    if (this->state == State::Playing) {
+        // 障害物の移動
+        for (auto obstacle : this->obstacles) {
+            obstacle->moveLeft(SCROLL_SPEED_X * dt);
+        }
+        
+        // 障害物とキャラの衝突判定
+        Rect characterRect = this->character->getRect();
+        for (auto obstacle : this->obstacles) {
+            auto obstacleRects = obstacle->getRects();
+
+            for (Rect obstacleRect : obstacleRects) {
+                bool hit = characterRect.intersectsRect(obstacleRect);
+                if (hit) {
+                    triggerGameOver();
+                }
             }
         }
     }
@@ -89,7 +91,19 @@ void MainScene::setupTouchHandling()
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = [&](Touch* touch, Event* event)
     {
-        this->character->jump();
+         switch (this->state) {
+         case State::Ready:
+            this->triggerPlaying();
+         case State::Playing:
+            this->character->jump();
+            break;
+         case State::GameOver:
+            auto nextGameScene = MainScene::createScene();
+            auto transition = TransitionFade::create(1.0f, nextGameScene);
+            Director::getInstance()->replaceScene(transition);
+            break;
+         }
+        
         return true;
     };
     
@@ -110,3 +124,21 @@ void MainScene::createObstacle(float dt)
     }
 }
 
+void MainScene::triggerReady()
+{
+    this->state = State::Ready;
+    this->character->stopFly();
+}
+
+void MainScene::triggerPlaying()
+{
+    this->state = State::Playing;
+    this->character->startFly();
+    this->schedule(CC_SCHEDULE_SELECTOR(MainScene::createObstacle), OBSTACLE_TIME_SPAN);
+}
+
+void MainScene::triggerGameOver()
+{
+    this->state = State::GameOver;
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainScene::createObstacle));
+}

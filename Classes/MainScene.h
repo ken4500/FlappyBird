@@ -6,6 +6,12 @@
 class Character;
 #include "Obstacle.h"
 
+enum class State {
+    Ready,
+    Playing,
+    GameOver
+};
+
 class MainScene : public cocos2d::Layer
 {
 public:
@@ -21,10 +27,13 @@ private:
     Character* character;
     cocos2d::Vector<Obstacle*> obstacles;
     cocos2d::Node* background;
+    State state;
     
     void setupTouchHandling();
     void createObstacle(float dt);
-
+    void triggerReady();
+    void triggerPlaying();
+    void triggerGameOver();
 };
 
 #endif // __MAIN_SCENE_H__

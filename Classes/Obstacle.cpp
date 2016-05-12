@@ -42,3 +42,21 @@ std::vector<Rect> Obstacle::getRects()
     
     return rects;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
