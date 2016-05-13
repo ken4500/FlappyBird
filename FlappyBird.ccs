@@ -73,6 +73,7 @@
         <Project Name="MainScene.csd" Type="Scene" />
         <Image Name="screen_shot.png" />
         <Project Name="Obstacle.csd" Type="Node" />
+        <Project Name="Ground.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

@@ -5,6 +5,8 @@
 #include "Character.h"
 #include "ObstacleReader.h"
 #include "Constants.h"
+#include "Ground.h"
+#include "GroundReader.h"
 
 USING_NS_CC;
 
@@ -36,6 +38,7 @@ bool MainScene::init()
     CSLoader* instance = CSLoader::getInstance();
     instance->registReaderObject("CharacterReader", (ObjectFactory::Instance) CharacterReader::getInstance);
     instance->registReaderObject("ObstacleReader", (ObjectFactory::Instance) ObstacleReader::getInstance);
+    instance->registReaderObject("GroundReader", (ObjectFactory::Instance) GroundReader::getInstance);
     
     auto rootNode = CSLoader::createNode("MainScene.csb");
     Size size = Director::getInstance()->getVisibleSize();
@@ -45,8 +48,10 @@ bool MainScene::init()
     this->background = rootNode->getChildByName("back");
     this->character  = this->background->getChildByName<Character*>("character");
     this->character->setLocalZOrder(1);
-    auto ground = this->background->getChildByName("ground");
-    ground->setLocalZOrder(1);
+    this->ground = this->background->getChildByName<Ground*>("ground");
+    this->ground->setLocalZOrder(1);
+    this->scoreLabel = this->background->getChildByName<ui::TextBMFont*>("scoreLabel");
+    this->scoreLabel->setLocalZOrder(1);
 
     addChild(rootNode);
 
@@ -63,27 +68,76 @@ void MainScene::onEnter()
 
 void MainScene::update(float dt)
 {
+    switch (this->state) {
+    case State::Ready:
+        updateReady(dt);
+        break;
+    case State::Playing:
+        updatePlaying(dt);
+        break;
+    case State::GameOver:
+        updateGameOver(dt);
+        break;
+    }
+}
 
-    if (this->state == State::Playing) {
-        // 障害物の移動
-        for (auto obstacle : this->obstacles) {
-            obstacle->moveLeft(SCROLL_SPEED_X * dt);
-        }
-        
-        // 障害物とキャラの衝突判定
-        Rect characterRect = this->character->getRect();
-        for (auto obstacle : this->obstacles) {
-            auto obstacleRects = obstacle->getRects();
+void MainScene::updateReady(float dt)
+{
+    //床の移動
+    this->ground->moveLeft(SCROLL_SPEED_X * dt);
+}
 
-            for (Rect obstacleRect : obstacleRects) {
-                bool hit = characterRect.intersectsRect(obstacleRect);
-                if (hit) {
-                    triggerGameOver();
-                }
+void MainScene::updatePlaying(float dt)
+{
+    float moveDistance = SCROLL_SPEED_X * dt;
+
+    //床の移動
+    this->ground->moveLeft(moveDistance);
+
+    // 障害物の移動
+    for (auto obstacle : this->obstacles) {
+        obstacle->moveLeft(moveDistance);
+    }
+    
+    // 障害物とキャラの衝突判定
+    Rect characterRect = this->character->getRect();
+    for (auto obstacle : this->obstacles) {
+        auto obstacleRects = obstacle->getRects();
+
+        for (Rect obstacleRect : obstacleRects) {
+            bool hit = characterRect.intersectsRect(obstacleRect);
+            if (hit) {
+                triggerGameOver();
             }
         }
     }
     
+    // 床との衝突判定
+    if (this->character->getBottomY() < this->ground->getPositionY()) {
+        this->character->setBottomY(this->ground->getPositionY());
+        this->character->stopFly();
+        triggerGameOver();
+    }
+    
+     // スコアの判定
+    for (auto obstacle : this->obstacles) {
+        float currentX = obstacle->getPositionX();
+        float lastX    = currentX - moveDistance;
+        if (lastX < this->character->getPositionX()
+        && this->character->getPositionX() <= currentX) {
+            this->setScore(this->score + 1);
+        }
+    }
+
+}
+
+void MainScene::updateGameOver(float dt)
+{
+    // 床との衝突判定
+    if (this->character->getBottomY() < this->ground->getPositionY()) {
+        this->character->setBottomY(this->ground->getPositionY());
+        this->character->stopFly();
+    }
 }
 
 void MainScene::setupTouchHandling()
@@ -128,6 +182,7 @@ void MainScene::triggerReady()
 {
     this->state = State::Ready;
     this->character->stopFly();
+    this->setScore(0);
 }
 
 void MainScene::triggerPlaying()
@@ -141,4 +196,10 @@ void MainScene::triggerGameOver()
 {
     this->state = State::GameOver;
     this->unschedule(CC_SCHEDULE_SELECTOR(MainScene::createObstacle));
+}
+
+void MainScene::setScore(int score)
+{
+    this->score = score;
+    this->scoreLabel->setString(std::to_string(score));
 }

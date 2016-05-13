@@ -54,6 +54,8 @@
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		9F0815651CE4120B0020DD57 /* Obstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0815611CE4120B0020DD57 /* Obstacle.cpp */; };
 		9F0815661CE4120B0020DD57 /* ObstacleReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0815631CE4120B0020DD57 /* ObstacleReader.cpp */; };
+		9F08156B1CE55FFC0020DD57 /* Ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0815671CE55FFC0020DD57 /* Ground.cpp */; };
+		9F08156C1CE55FFC0020DD57 /* GroundReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F0815691CE55FFC0020DD57 /* GroundReader.cpp */; };
 		9FBCAB271CE332BD001CA4FA /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCAB231CE332BD001CA4FA /* Character.cpp */; };
 		9FBCAB281CE332BD001CA4FA /* CharacterReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FBCAB251CE332BD001CA4FA /* CharacterReader.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
@@ -121,6 +123,10 @@
 		9F0815621CE4120B0020DD57 /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
 		9F0815631CE4120B0020DD57 /* ObstacleReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObstacleReader.cpp; sourceTree = "<group>"; };
 		9F0815641CE4120B0020DD57 /* ObstacleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstacleReader.h; sourceTree = "<group>"; };
+		9F0815671CE55FFC0020DD57 /* Ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ground.cpp; sourceTree = "<group>"; };
+		9F0815681CE55FFC0020DD57 /* Ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ground.h; sourceTree = "<group>"; };
+		9F0815691CE55FFC0020DD57 /* GroundReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GroundReader.cpp; sourceTree = "<group>"; };
+		9F08156A1CE55FFC0020DD57 /* GroundReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroundReader.h; sourceTree = "<group>"; };
 		9FBCAB231CE332BD001CA4FA /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
 		9FBCAB241CE332BD001CA4FA /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		9FBCAB251CE332BD001CA4FA /* CharacterReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterReader.cpp; sourceTree = "<group>"; };
@@ -269,6 +275,10 @@
 				9F0815621CE4120B0020DD57 /* Obstacle.h */,
 				9F0815631CE4120B0020DD57 /* ObstacleReader.cpp */,
 				9F0815641CE4120B0020DD57 /* ObstacleReader.h */,
+				9F0815671CE55FFC0020DD57 /* Ground.cpp */,
+				9F0815681CE55FFC0020DD57 /* Ground.h */,
+				9F0815691CE55FFC0020DD57 /* GroundReader.cpp */,
+				9F08156A1CE55FFC0020DD57 /* GroundReader.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -453,7 +463,9 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				9FBCAB271CE332BD001CA4FA /* Character.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				9F08156B1CE55FFC0020DD57 /* Ground.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				9F08156C1CE55FFC0020DD57 /* GroundReader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

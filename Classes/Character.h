@@ -20,6 +20,8 @@ public:
     void update(float dt) override;
     void jump();
     cocos2d::Rect getRect();
+    float getBottomY();
+    void setBottomY(float y);
     
     void startFly();
     void stopFly();

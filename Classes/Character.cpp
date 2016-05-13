@@ -62,21 +62,12 @@ void Character::stopFly()
     this->isFlying = false;
 }
 
+float Character::getBottomY()
+{
+    return this->getRect().origin.y;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void Character::setBottomY(float y)
+{
+    this->setPositionY(y + this->getRect().size.height / 2);
+}

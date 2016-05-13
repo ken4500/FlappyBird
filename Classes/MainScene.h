@@ -2,9 +2,10 @@
 #define __MAIN_SCENE_H__
 
 #include "cocos2d.h"
-
-class Character;
+#include "ui/CocosGUI.h"
 #include "Obstacle.h"
+class Character;
+class Ground;
 
 enum class State {
     Ready,
@@ -19,21 +20,28 @@ public:
     virtual bool init() override;
     void onEnter() override;
     void update(float dt) override;
+    void updateReady(float dt);
+    void updatePlaying(float dt);
+    void updateGameOver(float dt);
 
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 
 private:
     Character* character;
+    Ground* ground;
     cocos2d::Vector<Obstacle*> obstacles;
     cocos2d::Node* background;
     State state;
+    cocos2d::ui::TextBMFont* scoreLabel;
+    int score;
     
     void setupTouchHandling();
     void createObstacle(float dt);
     void triggerReady();
     void triggerPlaying();
     void triggerGameOver();
+    void setScore(int score);
 };
 
 #endif // __MAIN_SCENE_H__
