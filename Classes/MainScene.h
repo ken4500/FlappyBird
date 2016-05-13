@@ -6,6 +6,7 @@
 #include "Obstacle.h"
 class Character;
 class Ground;
+class MedalBoard;
 
 enum class State {
     Ready,
@@ -30,6 +31,7 @@ public:
 private:
     Character* character;
     Ground* ground;
+    MedalBoard* medalboard;
     cocos2d::Vector<Obstacle*> obstacles;
     cocos2d::Node* background;
     State state;
