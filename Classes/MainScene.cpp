@@ -7,6 +7,7 @@
 #include "Constants.h"
 #include "Ground.h"
 #include "GroundReader.h"
+#include "HighScoreManager.hpp"
 
 USING_NS_CC;
 
@@ -196,6 +197,9 @@ void MainScene::triggerGameOver()
 {
     this->state = State::GameOver;
     this->unschedule(CC_SCHEDULE_SELECTOR(MainScene::createObstacle));
+    HighScoreManager* highScoreManager = new HighScoreManager();
+    highScoreManager->registerCurrentScore(this->score);
+    delete highScoreManager;
 }
 
 void MainScene::setScore(int score)

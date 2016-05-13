@@ -1,2 +1,9 @@
 Resources/res/Assets/
 cocosstudio/Assets/
+
+cocos2d/build/build/
+cocos2d/build/cocos2d_libs.xcodeproj/xcuserdata/
+proj.ios_mac/build/
+proj.ios_mac/*.xcodeproj/project.xcworkspace
+proj.ios_mac/*.xcodeproj/xcuserdata/
+!*.pch
