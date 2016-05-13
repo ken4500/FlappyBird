@@ -7,17 +7,21 @@
 //
 
 #include "HighScoreManager.hpp"
-using namespace cocos2d;
+#include "Constants.h"
+USING_NS_CC;
 
-void HighScoreManager::saveHighScore(int score)
+void HighScoreManager::registerCurrentScore(int score)
 {
     UserDefault* userDef = UserDefault::getInstance();
-    userDef->setIntegerForKey("highScore", score);
+    if (score > userDef->getIntegerForKey(KEY_HIGHSCORE.c_str(), 0))
+    {
+        userDef->setIntegerForKey(KEY_HIGHSCORE.c_str(), score);
+    }
 }
 
-int HighScoreManager::loadHighScore()
+int HighScoreManager::getHighScore()
 {
     UserDefault* userDef = UserDefault::getInstance();
-    int highScore = userDef->getIntegerForKey("highScore", 0);
+    int highScore = userDef->getIntegerForKey(KEY_HIGHSCORE.c_str(), 0);
     return highScore;
 }

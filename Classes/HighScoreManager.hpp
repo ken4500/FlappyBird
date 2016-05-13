@@ -12,8 +12,8 @@
 class HighScoreManager {
 
 public:
-    void saveHighScore(int score);
-    int loadHighScore();
+    void registerCurrentScore(int score);
+    int getHighScore();
 
 };
 
