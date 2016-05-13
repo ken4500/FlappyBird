@@ -28,7 +28,7 @@ bool MedalBoard::init() {
 void MedalBoard::displayMedalByScore(int score)
 {
     this->setPosition(Vec2(144, 0));
-    this->runAction(EaseSineOut::create(MoveBy::create(0.8f, Vec2(0.0f, 358.0f))));
+    this->runAction(EaseSineOut::create(MoveBy::create(0.8f, Vec2(0.0f, 316.0f))));
     
     auto board = this->getChildByName("board");
     if(score < 10)
