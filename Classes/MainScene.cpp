@@ -9,6 +9,9 @@
 #include "GroundReader.h"
 #include "HighScoreManager.hpp"
 
+#include "MedalBoard.h"
+#include "MedalReader.h"
+
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
@@ -40,6 +43,9 @@ bool MainScene::init()
     instance->registReaderObject("CharacterReader", (ObjectFactory::Instance) CharacterReader::getInstance);
     instance->registReaderObject("ObstacleReader", (ObjectFactory::Instance) ObstacleReader::getInstance);
     instance->registReaderObject("GroundReader", (ObjectFactory::Instance) GroundReader::getInstance);
+    // --- medal ---
+    instance->registReaderObject("MedalReader", (ObjectFactory::Instance) MedalReader::getInstance);
+    // --- ---
     
     auto rootNode = CSLoader::createNode("MainScene.csb");
     Size size = Director::getInstance()->getVisibleSize();
@@ -54,6 +60,16 @@ bool MainScene::init()
     this->scoreLabel = this->background->getChildByName<ui::TextBMFont*>("scoreLabel");
     this->scoreLabel->setLocalZOrder(1);
 
+    Obstacle* obstacle = dynamic_cast<Obstacle*>(CSLoader::createNode("Obstacle.csb"));
+    this->obstacles.pushBack(obstacle);
+    this->background->addChild(obstacle);
+    
+    // --- medal ---
+    this->medalboard = dynamic_cast<MedalBoard*>(CSLoader::createNode("Medal.csb"));
+    this->medalboard->setLocalZOrder(3);
+    this->background->addChild(this->medalboard);
+    // --- ---
+    
     addChild(rootNode);
 
     return true;
@@ -195,6 +211,10 @@ void MainScene::triggerPlaying()
 
 void MainScene::triggerGameOver()
 {
+    // --- medal ---
+    this->medalboard->displayMedalByScore(this->score);
+    // --- ---
+    
     this->state = State::GameOver;
     this->unschedule(CC_SCHEDULE_SELECTOR(MainScene::createObstacle));
     HighScoreManager* highScoreManager = new HighScoreManager();
