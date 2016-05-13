@@ -70,10 +70,10 @@
           </Folder>
         </Folder>
         <Project Name="Character.csd" Type="Node" />
-        <Project Name="MainScene.csd" Type="Scene" />
-        <Image Name="screen_shot.png" />
-        <Project Name="Obstacle.csd" Type="Node" />
         <Project Name="Ground.csd" Type="Node" />
+        <Project Name="MainScene.csd" Type="Scene" />
+        <Project Name="Obstacle.csd" Type="Node" />
+        <Image Name="screen_shot.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>
